@@ -3,7 +3,6 @@ package org.example.fitnesstrackerapi.controller;
 import org.example.fitnesstrackerapi.model.entity.Exercise;
 import org.example.fitnesstrackerapi.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.security.AuthenticationAuditListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,12 +12,10 @@ import java.util.List;
 @RequestMapping("/api/exercise")
 public class ExcerciseController {
     private final ExerciseService exerciseService;
-    private final AuthenticationAuditListener authenticationAuditListener;
 
     @Autowired
-    public ExcerciseController(ExerciseService exerciseService, AuthenticationAuditListener authenticationAuditListener) {
+    public ExcerciseController(ExerciseService exerciseService) {
         this.exerciseService = exerciseService;
-        this.authenticationAuditListener = authenticationAuditListener;
     }
 
     @GetMapping

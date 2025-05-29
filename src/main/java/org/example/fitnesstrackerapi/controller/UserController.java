@@ -35,6 +35,11 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
+    /*@PostMapping("/{id}")
+    public ResponseEntity<User> updateUserWeight(@PathVariable long id, @RequestBody User user) {
+        //something
+    }*/
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable long id) {
         userService.deleteUser(id);

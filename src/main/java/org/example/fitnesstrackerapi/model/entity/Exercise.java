@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.fitnesstrackerapi.model.enums.ExerciseType;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter

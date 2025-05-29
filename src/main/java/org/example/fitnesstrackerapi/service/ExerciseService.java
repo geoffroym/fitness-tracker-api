@@ -29,10 +29,6 @@ public class ExerciseService {
         return exerciseRepo.save(exercise);
     }
 
-    public Exercise updateExercise(Exercise exercise) {
-        return exerciseRepo.save(exercise);
-    }
-
     public void deleteExercise(Long id) {
         exerciseRepo.deleteById(id);
     }

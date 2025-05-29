@@ -1,6 +1,5 @@
 package org.example.fitnesstrackerapi.service;
 
-import org.example.fitnesstrackerapi.exceptions.WorkoutNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.Workout;
 import org.example.fitnesstrackerapi.repository.WorkoutRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,7 @@ public class WorkoutService {
     //create, read, update, delete
 
     public Workout getWorkoutById(Long id) {
-        Workout workout;
-        try {
-            workout = workoutRepo.findById(id).orElseThrow();
-        } catch (NoSuchElementException e) {
-            throw new WorkoutNotFoundException("Workout " + id + " not found.");
-        }
-        return workout;
+        return workoutRepo.findById(id).orElse(null);
     }
 
     public List<Workout> getAllWorkouts() {

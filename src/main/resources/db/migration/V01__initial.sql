@@ -10,3 +10,4 @@ create table if not exists users(
     weight double precision not null,
     goal varchar(50) not null
 );
+

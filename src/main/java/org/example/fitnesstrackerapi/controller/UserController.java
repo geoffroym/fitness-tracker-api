@@ -21,13 +21,15 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+        List<User> users = userService.getAllUsers();
+        System.out.println(">>> Number of users fetched: " + users.size());
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> getUserById(@PathVariable long id) {
-        User user = userService.getUserById(id);
-        return ResponseEntity.ok(user.toString());
+    public ResponseEntity<User> getUserById(@PathVariable long id) {
+        //User user = userService.getUserById(id);
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping

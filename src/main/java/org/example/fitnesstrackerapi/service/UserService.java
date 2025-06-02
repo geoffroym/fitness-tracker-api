@@ -29,11 +29,6 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    /*public User updateUserWeight(Long id) {
-        User user = userRepo.findById(id).orElseThrow();
-        return userRepo.save(user);
-    }*/
-
     public void deleteUser(Long id) {
         userRepo.deleteById(id);
     }

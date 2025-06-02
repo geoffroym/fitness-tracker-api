@@ -19,3 +19,4 @@ server:
     include-message: always
     whitelabel:
       enabled: false
+  port: 8080

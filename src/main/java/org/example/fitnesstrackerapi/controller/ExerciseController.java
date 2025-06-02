@@ -1,7 +1,10 @@
 package org.example.fitnesstrackerapi.controller;
 
+import org.example.fitnesstrackerapi.dto.ExerciseDto;
 import org.example.fitnesstrackerapi.model.entity.Exercise;
+import org.example.fitnesstrackerapi.model.entity.Workout;
 import org.example.fitnesstrackerapi.service.ExerciseService;
+import org.example.fitnesstrackerapi.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +13,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/exercise")
-public class ExcerciseController {
+public class ExerciseController {
     private final ExerciseService exerciseService;
+    private final WorkoutService workoutService;
 
     @Autowired
-    public ExcerciseController(ExerciseService exerciseService) {
+    public ExerciseController(ExerciseService exerciseService, WorkoutService workoutService) {
         this.exerciseService = exerciseService;
+        this.workoutService = workoutService;
     }
 
     @GetMapping
@@ -30,7 +35,16 @@ public class ExcerciseController {
     }
 
     @PostMapping
-    public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
+    public ResponseEntity<Exercise> createExercise(@RequestBody ExerciseDto exerciseDto) {
+        Workout workout = workoutService.getWorkoutById(exerciseDto.getWorkout_id());
+        Exercise exercise = new Exercise(
+                workout,
+                exerciseDto.getExercise_name(),
+                exerciseDto.getSets(),
+                exerciseDto.getReps(),
+                exerciseDto.getWeightKg(),
+                exerciseDto.getType()
+                );
         return ResponseEntity.ok(exerciseService.addExercise(exercise));
     }
 

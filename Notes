@@ -1,0 +1,27 @@
+NEW USER
+{
+    "name": "Luigi",
+    "email": "lugi@mail.com",
+    "password": "password123",
+    "dayOfBirth": "2024-07-20T23:00:00.000+00:00",
+    "height": 110.0,
+    "weight": 6.6,
+    "goal": "MAINTENANCE"
+}
+
+NEW WORKOUT
+{
+    "userId": 1,
+    "date": "2025-06-01T22:00:00.000+00:00",
+    "durationMinutes": 100
+}
+
+NEW EXERCISE
+{
+    "workout_id": 2,
+    "exercise_name": "Hip Thrust",
+    "sets": 3,
+    "reps": 10,
+    "weightKg": 110,
+    "type": "STRENGTH"
+}

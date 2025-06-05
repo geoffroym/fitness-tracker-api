@@ -2,12 +2,14 @@ package org.example.fitnesstrackerapi;
 
 import com.github.javafaker.Faker;
 import org.example.fitnesstrackerapi.model.entity.Exercise;
+import org.example.fitnesstrackerapi.model.entity.NutritionLog;
 import org.example.fitnesstrackerapi.model.entity.User;
 import org.example.fitnesstrackerapi.model.entity.Workout;
 import org.example.fitnesstrackerapi.model.enums.ExerciseType;
 import org.example.fitnesstrackerapi.model.enums.Goal;
-import org.example.fitnesstrackerapi.repository.UserRepo;
+import org.example.fitnesstrackerapi.model.enums.NutritionType;
 import org.example.fitnesstrackerapi.service.ExerciseService;
+import org.example.fitnesstrackerapi.service.NutritionLogService;
 import org.example.fitnesstrackerapi.service.UserService;
 import org.example.fitnesstrackerapi.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -26,13 +27,15 @@ public class InitialData implements CommandLineRunner {
     private final UserService userService;
     private final WorkoutService workoutService;
     private final ExerciseService exerciseService;
+    private final NutritionLogService nutritionLogService;
     private final Faker faker = new Faker();
 
     @Autowired
-    public InitialData(UserService userService, WorkoutService workoutService, ExerciseService exerciseService) {
+    public InitialData(UserService userService, WorkoutService workoutService, ExerciseService exerciseService, NutritionLogService nutritionLogService) {
         this.userService = userService;
         this.workoutService = workoutService;
         this.exerciseService = exerciseService;
+        this.nutritionLogService = nutritionLogService;
     }
 
     @Override
@@ -41,9 +44,11 @@ public class InitialData implements CommandLineRunner {
         List<User> users = new ArrayList<>();
         List<Workout> workoutList = new ArrayList<>();
         List<Exercise> exerciseList = new ArrayList<>();
+        List<NutritionLog> nutritionLogList = new ArrayList<>();
 
         Goal[] goals = Goal.values();
         ExerciseType[] exerciseTypes = ExerciseType.values();
+        NutritionType[] nutritionTypes = NutritionType.values();
 
         String[] exercises = {
                 "Deadlift", "Squat", "Bench Press", "Pull-ups", "Push-ups", "Lunges",
@@ -52,12 +57,12 @@ public class InitialData implements CommandLineRunner {
                 "Muay Thai", "Boxing", "Kick-backs", "BJJ"
         };
 
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             Goal randomGoal = goals[(int) (Math.random() * goals.length)];
             users.add(
                     userService.createUser(
                             new User(
-                                  faker.name().fullName(),
+                                    faker.name().fullName(),
                                     faker.internet().emailAddress(),
                                     faker.dragonBall().character(),
                                     faker.date().birthday(18, 100),
@@ -69,7 +74,7 @@ public class InitialData implements CommandLineRunner {
             );
         }
 
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             User randomUser = users.get((int) (Math.random() * users.toArray().length));
             workoutList.add(
                     workoutService.createWorkout(
@@ -79,13 +84,13 @@ public class InitialData implements CommandLineRunner {
                                             new SimpleDateFormat("yyyy-MM-dd").parse("2025-01-01"),
                                             new SimpleDateFormat("yyyy-MM-dd").parse("2025-05-31")
                                     ),
-                                    faker.number().numberBetween(20,120)
+                                    faker.number().numberBetween(20, 120)
                             )
                     )
             );
         }
 
-        for(int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++) {
             Workout randomWorkout = workoutList.get((int) (Math.random() * workoutList.toArray().length));
             ExerciseType randomType = exerciseTypes[(int) (Math.random() * exerciseTypes.length)];
             String randomExerciseName = exercises[new Random().nextInt(exercises.length)];
@@ -104,6 +109,27 @@ public class InitialData implements CommandLineRunner {
             );
         }
 
+        for (int i = 0; i < 5; i++) {
+            User randomUser = users.get((int) (Math.random() * users.toArray().length));
+            NutritionType randomType = nutritionTypes[(int) (Math.random() * nutritionTypes.length)];
+            nutritionLogList.add(
+                    nutritionLogService.createNutritionLog(
+                            new NutritionLog(
+                                    randomUser,
+                                    randomType,
+                                    faker.date().between(
+                                            new SimpleDateFormat("yyyy-MM-dd").parse("2025-01-01"),
+                                            new SimpleDateFormat("yyyy-MM-dd").parse("2025-05-31")
+                                    ),
+                                    faker.food().dish(),
+                                    faker.number().numberBetween(1, 300),
+                                    faker.number().randomDouble(2, 0, 900),
+                                    faker.number().randomDouble(2, 0, 900),
+                                    faker.number().randomDouble(2, 0, 900)
+                            )
+                    )
+            );
+        }
 
     }
 }

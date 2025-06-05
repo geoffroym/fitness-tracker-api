@@ -1,32 +1,16 @@
-package org.example.fitnesstrackerapi.model.entity;
+package org.example.fitnesstrackerapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import org.example.fitnesstrackerapi.model.enums.NutritionType;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "nutrition_log")
-public class NutritionLog {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "nutrition_gen")
-    @SequenceGenerator(name = "nutrition_gen", sequenceName = "nutrition_seq", allocationSize = 1)
-    private Long nutrition_id;
+public class NutritionLogDto {
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("nutrition_log")
-    private User user_id;
-
-    @Column(name = "nutrition_type")
+    private Long user_id;
     @Enumerated(EnumType.STRING)
     private NutritionType nutrition_type;
-
-    @Column(name = "log_date")
     private Date date;
     private String food;
     private double calories;
@@ -34,10 +18,7 @@ public class NutritionLog {
     private double carbohydrate;
     private double fat;
 
-    public NutritionLog() {
-    }
-
-    public NutritionLog(User user_id, NutritionType nutrition_type, Date date, String food, double calories, double protein, double carbohydrate, double fat) {
+    public NutritionLogDto(Long user_id, NutritionType nutrition_type, Date date, String food, double calories, double protein, double carbohydrate, double fat) {
         this.user_id = user_id;
         this.nutrition_type = nutrition_type;
         this.date = date;
@@ -48,19 +29,11 @@ public class NutritionLog {
         this.fat = fat;
     }
 
-    public Long getNutrition_id() {
-        return nutrition_id;
-    }
-
-    public void setNutrition_id(Long nutrition_id) {
-        this.nutrition_id = nutrition_id;
-    }
-
-    public User getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(User user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 

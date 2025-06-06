@@ -1,5 +1,7 @@
 package org.example.fitnesstrackerapi.service;
 
+import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
+import org.example.fitnesstrackerapi.exception.UserNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.User;
 import org.example.fitnesstrackerapi.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepo.findById(id).orElseThrow(NoSuchElementException::new);
+        return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     public User createUser(User user) {

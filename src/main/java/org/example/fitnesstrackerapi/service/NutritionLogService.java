@@ -1,5 +1,7 @@
 package org.example.fitnesstrackerapi.service;
 
+import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
+import org.example.fitnesstrackerapi.exception.NutritionalLogNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.NutritionLog;
 import org.example.fitnesstrackerapi.model.enums.NutritionType;
 import org.example.fitnesstrackerapi.repository.NutritionLogRepo;
@@ -23,7 +25,7 @@ public class NutritionLogService {
     }
 
     public NutritionLog getNutritionLogById(Long id) {
-        return nutritionLogRepo.findById(id).orElse(null);
+        return nutritionLogRepo.findById(id).orElseThrow(() -> new NutritionalLogNotFoundException(id));
     }
 
     public NutritionLog createNutritionLog(NutritionLog nutritionLog) {

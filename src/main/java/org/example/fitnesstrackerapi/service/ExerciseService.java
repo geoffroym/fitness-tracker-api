@@ -1,11 +1,13 @@
 package org.example.fitnesstrackerapi.service;
 
+import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.Exercise;
 import org.example.fitnesstrackerapi.repository.ExerciseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ExerciseService {
@@ -22,7 +24,7 @@ public class ExerciseService {
     }
 
     public Exercise getExerciseById(Long id) {
-        return exerciseRepo.findById(id).orElse(null);
+        return exerciseRepo.findById(id).orElseThrow(() -> new ExerciseNotFoundException(id));
     }
 
     public Exercise addExercise(Exercise exercise) {

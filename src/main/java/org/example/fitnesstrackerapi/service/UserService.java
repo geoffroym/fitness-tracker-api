@@ -1,6 +1,5 @@
 package org.example.fitnesstrackerapi.service;
 
-import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
 import org.example.fitnesstrackerapi.exception.UserNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.User;
 import org.example.fitnesstrackerapi.repository.UserRepo;

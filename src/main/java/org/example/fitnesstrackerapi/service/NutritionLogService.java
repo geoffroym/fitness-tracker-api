@@ -1,9 +1,7 @@
 package org.example.fitnesstrackerapi.service;
 
-import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
 import org.example.fitnesstrackerapi.exception.NutritionalLogNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.NutritionLog;
-import org.example.fitnesstrackerapi.model.enums.NutritionType;
 import org.example.fitnesstrackerapi.repository.NutritionLogRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

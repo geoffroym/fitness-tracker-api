@@ -1,6 +1,5 @@
 package org.example.fitnesstrackerapi.service;
 
-import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
 import org.example.fitnesstrackerapi.exception.WorkoutNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.Workout;
 import org.example.fitnesstrackerapi.repository.WorkoutRepo;

@@ -26,7 +26,7 @@ class ExerciseServiceTest {
     void testGetExerciseById_whenFound_returnsExercise() {
         // given
         Long id = 1L;
-        Exercise exercise = new Exercise(); // You can set fields if needed
+        Exercise exercise = new Exercise();
         when(exerciseRepo.findById(id)).thenReturn(Optional.of(exercise));
 
         // when

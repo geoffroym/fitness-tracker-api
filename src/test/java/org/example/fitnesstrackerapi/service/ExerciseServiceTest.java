@@ -1,9 +1,8 @@
-package org.example.fitnesstrackerapi;
+package org.example.fitnesstrackerapi.service;
 
 import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.Exercise;
 import org.example.fitnesstrackerapi.repository.ExerciseRepo;
-import org.example.fitnesstrackerapi.service.ExerciseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

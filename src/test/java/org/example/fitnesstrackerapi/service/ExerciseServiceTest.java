@@ -2,12 +2,14 @@ package org.example.fitnesstrackerapi.service;
 
 import org.example.fitnesstrackerapi.exception.ExerciseNotFoundException;
 import org.example.fitnesstrackerapi.model.entity.Exercise;
+import org.example.fitnesstrackerapi.model.entity.Workout;
 import org.example.fitnesstrackerapi.repository.ExerciseRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
+import static org.example.fitnesstrackerapi.model.enums.ExerciseType.STRENGTH;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,5 +53,29 @@ class ExerciseServiceTest {
 
         assertEquals("Exercise not found with id 99", thrown.getMessage());
         verify(exerciseRepo, times(1)).findById(id);
+    }
+
+    @Test
+    void shouldAddExerciseSuccessfully() {
+        Workout workout = new Workout();
+        Exercise exercise = new Exercise(workout, "Hip-thrusts", 3, 10, 105.0, STRENGTH);
+        when(exerciseRepo.save(exercise)).thenReturn(exercise);
+
+        Exercise result = exerciseService.addExercise(exercise);
+
+        assertNotNull(result);
+        assertEquals("Hip-thrusts", result.getExerciseName());
+        verify(exerciseRepo, times(1)).save(exercise);
+    }
+
+    @Test
+    void shouldDeleteExerciseSuccessfully() {
+        Long exerciseId = 1L;
+        when(exerciseRepo.existsById(exerciseId)).thenReturn(true);
+
+        exerciseService.deleteExercise(exerciseId);
+
+        verify(exerciseRepo, times(1)).deleteById(exerciseId);
+
     }
 }

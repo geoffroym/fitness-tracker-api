@@ -95,4 +95,17 @@ public class Exercise {
     public void setType(ExerciseType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "exerciseId=" + exerciseId +
+                ", workout_id=" + workout_id +
+                ", exerciseName='" + exerciseName + '\'' +
+                ", sets=" + sets +
+                ", reps=" + reps +
+                ", weightKg=" + weightKg +
+                ", type=" + type +
+                '}';
+    }
 }

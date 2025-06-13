@@ -60,4 +60,13 @@ public class ExerciseDto {
     public void setType(ExerciseType type) {
         this.type = type;
     }
+
+    public ExerciseDto(Long workout_id, String exercise_name, int sets, int reps, double weightKg, ExerciseType type) {
+        this.workout_id = workout_id;
+        this.exercise_name = exercise_name;
+        this.sets = sets;
+        this.reps = reps;
+        this.weightKg = weightKg;
+        this.type = type;
+    }
 }
